@@ -1,10 +1,36 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-const routes: Routes = [];
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+
+
+import { LoginGuardGuard } from './services/guards/login-guard.guard';
+
+import { FullComponent } from './layouts/full/full.component';
+import { BlankComponent } from './layouts/blank/blank.component';
+import { RegisterComponent } from './login/register.component';
+import { LoginComponent } from './login/login.component';
+
+import { NopagefoundComponent } from './shared/nopagefound/nopagefound.component';
+
+const AppRoutes: Routes = [
+  { path: 'login', component: LoginComponent },
+    { path: 'register', component: RegisterComponent },
+  {
+    path: '',
+    component: FullComponent,
+    canActivate: [ LoginGuardGuard ],
+    loadChildren: './pages/pages.module#PagesModule'
+  },
+
+  {
+    path: '**',
+    component: NopagefoundComponent
+  }
+];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(AppRoutes)],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }
