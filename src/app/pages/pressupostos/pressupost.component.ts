@@ -7,7 +7,7 @@ import { Persona } from '../../models/persona.model';
 import { Vehicle } from '../../models/vehicle.model';
 import swal from 'sweetalert2';
 import * as moment from 'moment';
-import { ToastrService } from 'ngx-toastr';
+// import { ToastrService } from 'ngx-toastr';
 
 import { Subscription } from 'rxjs/Subscription';
 import { Observable } from 'rxjs/Observable';
@@ -19,6 +19,7 @@ import { map } from 'rxjs/operator/map';
 
 import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
 import { IAlert } from '../../component/alert/alert.component';
+import { FacturaDetall } from 'src/app/models/facturadetall.model';
 
 @Component({
   selector: 'app-pressupost',
@@ -45,12 +46,14 @@ export class PressupostComponent implements OnInit {
   numnodisponibles = 0;
   disponibles = true;
 
+  detallfactura: FacturaDetall;
+
   carregant = true;
 
   closeResult: string;
 
   constructor(
-    private toastr: ToastrService,
+    // private toastr: ToastrService,
     public _vehiclesService: VehicleService,
     public _pressupostService: PressupostService,
     public _clientsService: PersonaService,
@@ -374,10 +377,14 @@ export class PressupostComponent implements OnInit {
     this._pressupostService.guardaPressupost (vpressupost)
             .subscribe( pressupost => {
               console.log(pressupost);
-              this.toastr.warning('Pressupost anulat');
+              // this.toastr.warning('Pressupost anulat');
               this._reservaService.anular(vpressupost._id)
                 .subscribe( reserva => {
                   console.log(reserva);
+                  this._reservaService.lliuradatesBookingPerPressupos(vpressupost._id)
+                    .subscribe( reserva2 => {
+                      console.log(reserva2);
+                    } );
                 });
   });
 
@@ -399,7 +406,7 @@ export class PressupostComponent implements OnInit {
     this._pressupostService.guardaPressupost (vpressupost)
             .subscribe( pressupost => {
               console.log(pressupost);
-              this.toastr.info('Pressupost confirmat');
+              // this.toastr.info('Pressupost confirmat');
               this._reservaService.confirmar(vpressupost._id)
                 .subscribe( reserva => {
                   console.log(reserva);
@@ -424,11 +431,14 @@ export class PressupostComponent implements OnInit {
     this._pressupostService.guardaPressupost (vpressupost)
             .subscribe( pressupost => {
               console.log(pressupost);
-              this.toastr.success('Pressupost facturat');
+              // this.toastr.success('Pressupost facturat');
               this._reservaService.facturar(vpressupost._id)
                 .subscribe( reserva => {
                   console.log(reserva);
-                  this._facturaService.crearFactura(vpressupost)
+                  this.detallfactura = new FacturaDetall(vpressupost.detall['vehicle'], vpressupost.detall['temporada'],
+                        vpressupost.detall['temporada'], vpressupost.detall['temporada'], vpressupost.detall['temporada'],
+                              vpressupost.detall['temporada'], vpressupost.detall['temporada']);
+                  this._facturaService.crearFactura(vpressupost, this.detallfactura)
                     .subscribe( factura => {
                       console.log(factura);
                     });

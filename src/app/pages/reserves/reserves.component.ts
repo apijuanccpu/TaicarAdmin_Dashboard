@@ -53,11 +53,7 @@ export class ReservesComponent implements OnInit {
 
   buscarReserves( termino: string ) {
 
-    // if ( termino.length <= 0 ) {
-    //   this.carregarReserves();
-    //   return;
-    // }
-
+    this.reserves = [];
     this._reservaService.buscarReservesperVehicle(termino)
       .subscribe ( reserves => {
         this.reserves = reserves;

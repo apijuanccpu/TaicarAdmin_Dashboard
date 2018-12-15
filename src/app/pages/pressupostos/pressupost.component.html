@@ -71,7 +71,7 @@
                                 <div ngbDropdownMenu aria-labelledby="dropdownBasic2">
                                     <button *ngIf="pressupost.estat=='vigent'" (click)="confirmarPressupost(pressupost)" class="dropdown-item">Confirma</button>
                                     <button *ngIf="pressupost.estat=='vigent'" (click)="anulaPressupost(pressupost)" class="dropdown-item">Anula</button>
-                                    <button *ngIf="pressupost.estat=='vigent'" (click)="facturarPressupost(pressupost)" class="dropdown-item">Factura</button>
+                                    <button *ngIf="pressupost.estat=='vigent' || pressupost.estat=='confirmat'" (click)="facturarPressupost(pressupost)" class="dropdown-item">Factura</button>
                                 </div>
                             </div>
                             <button *ngIf="pressupost.estat=='vigent'" class="btn btn-success" [disabled]="pressuForm.invalid" (click)="guardaPressupost(pressupost)" type="button"> Guarda </button>

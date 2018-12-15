@@ -21,7 +21,7 @@ import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap/modal/modal.module';
 import { FlatpickrModule } from 'angularx-flatpickr';
 
 import {NgbDropdownConfig} from '@ng-bootstrap/ng-bootstrap';
-
+// import { NbLayoutModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { DashboardComponent } from './dashboard/dashboard.component';
 
@@ -55,8 +55,14 @@ import { ReservesComponent } from './reserves/reserves.component';
 import { Caravana2Component } from './vehicles/caravana2.component';
 import { VerificaTokenGuard, AdminGuard } from '../services/service.index';
 import { UsuariosComponent } from './usuarios/usuarios.component';
-import { ToastrModule } from 'ngx-toastr';
+
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { Toast, ToastPackage, ToastrIconClasses, ToastrService } from 'ngx-toastr';
+// import { ToastrModule } from 'ngx-toastr';
 import { NotificacionsComponent } from './notificacions/notificacions.component';
+import { DespesesComponent } from './despeses/despeses.component';
+import { DespesaComponent } from './despeses/despesa.component';
+
 
 
 const routes: Routes = [
@@ -161,6 +167,22 @@ const routes: Routes = [
         component: NotificacionsComponent
     },
     {
+        path: 'despeses',
+        data: {
+          title: 'Taicar - Admin',
+          urls: [{ title: 'Despeses', url: '/despeses' }, { title: 'Gestió de despeses' }]
+        },
+        component: DespesesComponent
+    },
+    {
+        path: 'despesa/:id',
+        data: {
+          title: 'Taicar - Admin',
+          urls: [{ title: 'Despesa', url: '/despesa' }, { title: 'Gestió de despesa' }]
+        },
+        component: DespesaComponent
+    },
+    {
     path: 'usuarios',
         component: UsuariosComponent,
         canActivate: [ AdminGuard ],
@@ -207,10 +229,12 @@ const routes: Routes = [
         ReservesComponent,
         FacturacioComponent,
         FacturaComponent,
-        NotificacionsComponent
+        NotificacionsComponent,
+        DespesesComponent,
+        DespesaComponent
     ],
     exports: [
-        // CalendariComponent
+        CalendariComponent
         // DashboardComponent,
         // ProgressComponent,
         // Graficas1Component
@@ -219,7 +243,7 @@ const routes: Routes = [
         FormsModule,
         CommonModule,
         NgbModule,
-        ToastrModule.forRoot(),
+        // ToastrModule.forRoot(),
         FlatpickrModule.forRoot(),
         ChartsModule,
         PipesModule,
@@ -228,6 +252,8 @@ const routes: Routes = [
             useFactory: adapterFactory
           }),
         RouterModule.forChild(routes)
-    ]
+    ],
+    providers: [
+      ],
 })
 export class PagesModule { }

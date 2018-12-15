@@ -44,6 +44,21 @@ export const ROUTES: RouteInfo[] = [
     { path: '/facturacio',
       title: 'Facturacio', icon: '', class: '', label: '', labelClass: '', extralink: false, submenu: [] }
   ]
+},
+{
+  path: '',
+  title: 'Utilitats',
+  icon: 'mdi mdi-gauge',
+  class: 'has-arrow',
+  label: '3',
+  labelClass: 'label label-rouded label-themecolor pull-right',
+  extralink: false,
+  submenu: [
+    { path: '/despeses',
+      title: 'Despeses', icon: '', class: '', label: '', labelClass: '', extralink: false, submenu: [] },
+      { path: '/notificacions',
+      title: 'Notificacions', icon: '', class: '', label: '', labelClass: '', extralink: false, submenu: [] }
+  ]
 }
 
 ];

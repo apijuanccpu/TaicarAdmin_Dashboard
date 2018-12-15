@@ -2,14 +2,17 @@
     <div class="col-12">
         <div class="card">
             <div class="card-body">
+                <label for="typeahead-basic">Usuaris:</label>
+                <input id="typeahead-basic" type="text" class="form-control" [(ngModel)]="model" (selectItem)="selectedItem($event)" [ngbTypeahead]="search" />
+                <hr>
+                <!-- <input #input (keyup)="buscarPersona( input.value )" type="text" class="form-control" placeholder="Buscar usuario..."> -->
 
-                <!-- <input #pressu (keyup)="buscarPressupost( pressu.value )" type="text" class="form-control" placeholder="Buscar pressupost..."> -->
-                <label for="typeahead-template">Search for a state:</label>
-                <input id="typeahead-template" type="text" class="form-control" [(ngModel)]="model" [ngbTypeahead]="search" [resultTemplate]="rt" [inputFormatter]="formatter" />
             </div>
         </div>
     </div>
 </div>
+
+
 <div class="row animated fadeIn">
     <div class="col-12">
         <div class="card">
@@ -48,6 +51,7 @@
                         </tr>
                     </thead>
                     <tbody>
+
                         <tr *ngFor="let pressupost of pressupostos">
                             <td>
                                 {{ pressupost.num }}

@@ -40,6 +40,15 @@ export class PressupostService {
         });
   }
 
+  carregarPressupostosVigents(){
+    const url = URL_SERVICIOS + '/pressupost/vigents';
+    return this.http.get( url )
+        .map( (resp: any) => {
+          this.totalPressupostos = resp.total;
+          return resp.pressupostos;
+        });
+  }
+
   carregarPressupost( id: string) {
     const url = URL_SERVICIOS + '/pressupost/' + id;
 
@@ -62,7 +71,7 @@ export class PressupostService {
 
             });
 
-      }else {
+      } else {
       // creando
       url += '?token=' + this._usuarioService.token;
       return this.http.post( url, vpressupost )

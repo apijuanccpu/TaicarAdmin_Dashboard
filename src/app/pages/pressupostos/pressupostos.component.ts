@@ -14,6 +14,8 @@ import { Observable } from 'rxjs';
 import { ReservaService } from '../../services/reserva/reserva.service';
 import { Reserva } from '../../models/reserva.model';
 
+
+
 @Component({
   selector: 'app-pressupostos',
   templateUrl: './pressupostos.component.html'
@@ -26,10 +28,12 @@ export class PressupostosComponent implements OnInit {
   public model: any;
 
 
-
+  clickedItem;
   nomsclients = [];
   clients: Persona[] = [];
   pressupostos: Pressupost[] = [];
+
+
   constructor(
 
     public _pressupostosService: PressupostService,
@@ -39,9 +43,23 @@ export class PressupostosComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.carregarPressupostos();
+    this.carregarPressupostosVigents();
     this.carregarClients();
   }
+
+  search2 = (text$: Observable<string>) =>
+    text$.pipe(
+      debounceTime(200),
+      distinctUntilChanged(),
+      map(term => term.length < 2 ? []
+        : this.clients.filter(v => v.nombre.toLowerCase().indexOf(term.toLowerCase()) > -1).slice(0, 10))
+    )
+
+    selectedItem(item) {
+      this.clickedItem = item.item;
+      console.log(item);
+    }
+
 
 
 
@@ -81,6 +99,11 @@ export class PressupostosComponent implements OnInit {
 
 
         });
+  }
+
+  carregarPressupostosVigents() {
+    this._pressupostosService.carregarPressupostosVigents()
+        .subscribe( pressupostos => this.pressupostos = pressupostos);
   }
 
   carregarPressupostos() {
@@ -156,7 +179,7 @@ export class PressupostosComponent implements OnInit {
 // closeModal() { this.modalRef.close(); }
 
 open(content) {
-  this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
+  this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title', size: 'lg'}).result.then((result) => {
     this.closeResult = `Closed with: ${result}`;
   }, (reason) => {
     this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;

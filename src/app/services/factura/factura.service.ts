@@ -9,6 +9,7 @@ import { Reserva } from '../../models/reserva.model';
 
 import * as moment from 'moment';
 import { Factura } from '../../models/factura.model';
+import { FacturaDetall } from '../../models/facturadetall.model';
 
 @Injectable()
 export class FacturaService {
@@ -31,7 +32,7 @@ export class FacturaService {
         });
   }
 
-  crearFactura( vpressupost: Pressupost) {
+  crearFactura( vpressupost: Pressupost, vdetallfactura: FacturaDetall) {
     console.log(vpressupost);
 
     const factura = new Factura(vpressupost.num, vpressupost.data, vpressupost.data_vigencia,
@@ -44,7 +45,13 @@ export class FacturaService {
       return this.http.post( url, factura )
           .map( (resp: any) => {
             // swal('Pressupost Detall Creado', pressupost._id, 'success');
-            return resp.factura;
+            this.guardaDetall(vdetallfactura)
+              .subscribe( detallfactura => {
+                console.log(detallfactura);
+                return resp.factura;
+
+              });
+
           });
       }
       carregarFactura( id: string) {
@@ -65,5 +72,16 @@ export class FacturaService {
               return resp.pressupostos;
             });
       }
+
+      guardaDetall( vfacturadetall: FacturaDetall) {
+        let url = URL_SERVICIOS + '/facturadetall';
+
+          url += '?token=' + this._usuarioService.token;
+          return this.http.post( url, vfacturadetall )
+              .map( (resp: any) => {
+                // swal('Pressupost Detall Creado', pressupost._id, 'success');
+                return resp.factura_detall;
+              });
+          }
 
 }

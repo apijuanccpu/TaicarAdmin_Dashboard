@@ -13,7 +13,7 @@ import { LoginComponent } from './login/login.component';
 
 import { NopagefoundComponent } from './shared/nopagefound/nopagefound.component';
 
-const AppRoutes: Routes = [
+const Approutes: Routes = [
   { path: 'login', component: LoginComponent },
     { path: 'register', component: RegisterComponent },
   {
@@ -29,8 +29,8 @@ const AppRoutes: Routes = [
   }
 ];
 
-@NgModule({
+/* @NgModule({
   imports: [RouterModule.forRoot(AppRoutes)],
   exports: [RouterModule]
-})
-export class AppRoutingModule { }
+}) */
+export const APP_ROUTES = RouterModule.forRoot( Approutes, { useHash: true } );

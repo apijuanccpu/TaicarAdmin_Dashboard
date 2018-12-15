@@ -93,10 +93,10 @@
                         <tr *ngFor="let reserva of reserves">
 
                             <td>
-                                {{ reserva.pressupost._id }}
+                                {{ reserva.pressupost['_id'] }}
                             </td>
                             <td>
-                                {{ reserva.vehicle.matricula }}
+                                {{ reserva.vehicle['matricula'] }}
                             </td>
                             <td>
                                 {{ reserva.data_inicial }}

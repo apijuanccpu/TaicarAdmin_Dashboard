@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
-import { AppRoutingModule } from './app-routing.module';
+import { APP_ROUTES } from './app-routing.module';
 
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -65,10 +65,9 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule,
-    BrowserModule,
     BrowserAnimationsModule,
     FormsModule,
+    APP_ROUTES,
     ReactiveFormsModule,
     HttpClientModule,
     CalendarModule.forRoot({

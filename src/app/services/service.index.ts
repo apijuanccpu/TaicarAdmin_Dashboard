@@ -1,4 +1,5 @@
 import { PersonaService } from './persona/persona.service';
+import { DespesaService } from './despesa/despesa.service';
 
 // Guards
 export { LoginGuardGuard } from './guards/login-guard.guard';
@@ -16,6 +17,7 @@ export { ReservaService } from './reserva/reserva.service';
 
 export { NotificacionsService } from './notificacions/notificacions.service';
 export { FacturaService } from './factura/factura.service';
+export { DespesaService } from './despesa/despesa.service';
 
 
 export { SubirArchivoService } from './subir-archivo/subir-archivo.service';

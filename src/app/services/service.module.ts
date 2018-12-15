@@ -2,6 +2,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ModalUploadService } from '../component/modal-upload/modal-upload.service';
+import { DespesaService } from './despesa/despesa.service';
 
 
 import {
@@ -47,6 +48,7 @@ import {
     ReservaService,
     NotificacionsService,
     FacturaService,
+    DespesaService,
     VerificaTokenGuard
   ],
   declarations: []
