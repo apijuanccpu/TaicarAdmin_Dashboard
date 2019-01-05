@@ -87,13 +87,6 @@ export class PagamentComponent implements OnInit {
       });
   }
 
-  // guardaPagament(vpagament: Pagament) {
-  //   this._pagamentService.altaPagament(vpagament)
-  //     .subscribe ( pagament => {
-  //       console.log(pagament);
-  //     });
-  // }
-
   carregarFactures() {
     this._facturesService.carregarFactures()
     .subscribe( factures => {

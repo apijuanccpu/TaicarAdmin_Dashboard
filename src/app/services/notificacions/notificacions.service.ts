@@ -31,7 +31,7 @@ export class NotificacionsService {
   }
 
   carregarPressupostosCaducats() {
-    let url = URL_SERVICIOS + '/pressupost/caducats';
+    let url = URL_SERVICIOS + '/pressupost/caducats/desdeavui';
     url += '?token=' + this._usuarioService.token;
     return this.http.get( url )
         .map( (resp: any) => {

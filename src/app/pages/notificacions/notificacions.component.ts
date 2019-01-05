@@ -15,54 +15,54 @@ export class NotificacionsComponent implements OnInit {
 
   constructor(public _notificacionsService: NotificacionsService) { }
 
-  notifications: Object[] = [
-  ];
+  notifications: Object[] = [];
+  notifications2: Object[] = [];
 
-  notifs: Object[] = [
-    {
-      image: 'assets/images/users/1.jpg',
-      name: 'James Anderson',
-      comment:
-        // tslint:disable-next-line:max-line-length
-        'Lorem Ipsum is simply dummy text of the printing and type setting industry. Lorem Ipsum has beenorem Ipsum is simply dummy text of the printing and type setting industry.',
-      date: 'April 14, 2016',
-      status: 'Pending',
-      labelcolor: 'label-light-info'
-    },
-    {
-      image: 'assets/images/users/2.jpg',
-      name: 'Michael Jorden',
-      comment:
-        // tslint:disable-next-line:max-line-length
-        'Lorem Ipsum is simply dummy text of the printing and type setting industry. Lorem Ipsum has beenorem Ipsum is simply dummy text of the printing and type setting industry.',
-      date: 'April 14, 2016',
-      status: 'Approved',
-      labelcolor: 'label-light-success'
-    },
-    {
-      image: 'assets/images/users/4.jpg',
-      name: 'Johnathan Doeting',
-      comment:
-        // tslint:disable-next-line:max-line-length
-        'Lorem Ipsum is simply dummy text of the printing and type setting industry. Lorem Ipsum has beenorem Ipsum is simply dummy text of the printing and type setting industry.',
-      date: 'April 14, 2016',
-      status: 'Rejected',
-      labelcolor: 'label-light-danger'
-    },
-    {
-      image: 'assets/images/users/5.jpg',
-      name: 'James Anderson',
-      comment:
-        // tslint:disable-next-line:max-line-length
-        'Lorem Ipsum is simply dummy text of the printing and type setting industry. Lorem Ipsum has beenorem Ipsum is simply dummy text of the printing and type setting industry.',
-      date: 'April 14, 2016',
-      status: 'Pending',
-      labelcolor: 'label-light-info'
-    }
-  ];
+  // notifs: Object[] = [
+  //   {
+  //     image: 'assets/images/users/1.jpg',
+  //     name: 'James Anderson',
+  //     comment:
+  //       // tslint:disable-next-line:max-line-length
+  //       'Lorem Ipsum is simply dummy text of the printing and type setting industry. Lorem Ipsum has beenorem Ipsum is simply dummy text of the printing and type setting industry.',
+  //     date: 'April 14, 2016',
+  //     status: 'Pending',
+  //     labelcolor: 'label-light-info'
+  //   },
+  //   {
+  //     image: 'assets/images/users/2.jpg',
+  //     name: 'Michael Jorden',
+  //     comment:
+  //       // tslint:disable-next-line:max-line-length
+  //       'Lorem Ipsum is simply dummy text of the printing and type setting industry. Lorem Ipsum has beenorem Ipsum is simply dummy text of the printing and type setting industry.',
+  //     date: 'April 14, 2016',
+  //     status: 'Approved',
+  //     labelcolor: 'label-light-success'
+  //   },
+  //   {
+  //     image: 'assets/images/users/4.jpg',
+  //     name: 'Johnathan Doeting',
+  //     comment:
+  //       // tslint:disable-next-line:max-line-length
+  //       'Lorem Ipsum is simply dummy text of the printing and type setting industry. Lorem Ipsum has beenorem Ipsum is simply dummy text of the printing and type setting industry.',
+  //     date: 'April 14, 2016',
+  //     status: 'Rejected',
+  //     labelcolor: 'label-light-danger'
+  //   },
+  //   {
+  //     image: 'assets/images/users/5.jpg',
+  //     name: 'James Anderson',
+  //     comment:
+  //       // tslint:disable-next-line:max-line-length
+  //       'Lorem Ipsum is simply dummy text of the printing and type setting industry. Lorem Ipsum has beenorem Ipsum is simply dummy text of the printing and type setting industry.',
+  //     date: 'April 14, 2016',
+  //     status: 'Pending',
+  //     labelcolor: 'label-light-info'
+  //   }
+  // ];
 
   ngOnInit() {
-    console.log(this.notifs);
+    // console.log(this.notifs);
     this.carregarPressupostosSegonsDataVigencia();
     this.carregarPressupostosCaducats();
   }
@@ -89,11 +89,12 @@ export class NotificacionsComponent implements OnInit {
 }
 carregarPressupostosCaducats() {
   this._notificacionsService.carregarPressupostosCaducats()
-    .subscribe( resp => {
-      this.pressupostosCaducats = resp;
-      console.log(this.pressupostosambvigencia);
+    .subscribe( resp2 => {
+      console.log(resp2);
+      this.pressupostosCaducats = resp2;
+      console.log(this.pressupostosCaducats);
       for (const entry of this.pressupostosCaducats) {
-        const notificacio: Object = {
+        const notificacio2: Object = {
 
           image: 'assets/images/users/5.jpg',
           name: 'Pressupost caducat',
@@ -103,7 +104,7 @@ carregarPressupostosCaducats() {
           labelcolor: 'label-light-danger',
           pressupost: entry._id
         };
-        this.notifications.push(notificacio);
+        this.notifications.push(notificacio2);
       }
       console.log(this.notifications);
     });

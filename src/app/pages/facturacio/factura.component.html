@@ -125,7 +125,7 @@
             <div class="align-self-center">
                 <h4 class="m-b-0">Pagaments</h4>
             </div>
-            <div class="ml-auto align-self-center"><button class="btn btn-danger btn-sm">+ Pagament</button></div>
+            <div class="ml-auto align-self-center"><button (click)="open(modalPagament)" class="btn btn-danger btn-sm">+ Pagament</button></div>
         </div>
         <div class="row">
             <div class="card">
@@ -158,9 +158,9 @@
 
 </div>
 
-<ng-template #content let-modal>
+<ng-template #modalPagament let-modal>
     <div class="modal-header">
-        <h4 class="modal-title" id="modal-basic-title">Pagament</h4>
+        <h4 class="modal-title" id="modal-pagament">Pagament</h4>
         <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
         <span aria-hidden="true">&times;</span>
       </button>
@@ -184,7 +184,7 @@
             </div>
 
             <button class="btn btn-success" (click)="guardaPagament(pagament)" type="button"> Guarda </button>
-            <button class="btn btn-warning" type="button" [routerLink]="['/pagaments']"> Tanca </button>
+            <button class="btn btn-warning" type="button" (click)="modal.close('Save click')"> Tanca </button>
 
         </form>
     </div>

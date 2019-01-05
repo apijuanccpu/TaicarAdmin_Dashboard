@@ -24,7 +24,7 @@ export class FacturaComponent implements OnInit {
   pagaments: Pagament[] = [];
   factura: Factura = new Factura(0, null, null, null, null, 0, 0, 'vigent', '');
   factures_detall: FacturaDetall[] = [];
-
+  vid: string;
   carregant = true;
 
 
@@ -38,8 +38,8 @@ export class FacturaComponent implements OnInit {
   ) {
     activatedRoute.params.subscribe( params => {
       this.carregant = true;
-      const vid = params['id'];
-      this.cargarFactura(vid);
+      this.vid = params['id'];
+      this.cargarFactura(this.vid);
     });
    }
 
@@ -70,13 +70,18 @@ export class FacturaComponent implements OnInit {
       this._pagamentService.altaPagament(vpago)
       .subscribe( pagament => {
         console.log(pagament);
+        this._pagamentService.carregarPagamentsFactura(this.vid)
+              .subscribe( pagaments => {
+                this.pagaments = pagaments;
+                console.log(pagaments);
+              });
     });
   }
-  open(content) {
+  open(contenedor) {
     this.pagament = new Pagament(this.factura.client['_id'], this.factura._id, 0, null);
-    this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title', size: 'lg'}).result.then((result) => {
+    this.modalService.open(contenedor, {ariaLabelledBy: 'modal-basic-title', size: 'lg'}).result.then((result) => {
       this.closeResult = `Closed with: ${result}`;
-    }, (reason) => { 
+    }, (reason) => {
       this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
     });
   }

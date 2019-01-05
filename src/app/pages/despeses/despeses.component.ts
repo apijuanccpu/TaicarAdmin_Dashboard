@@ -18,12 +18,6 @@ import * as dadesTaula from './datos_despeses';
   styles: [`.form-control { width: 300px; }`]
 })
 export class DespesesComponent implements OnInit {
-
-  constructor(
-    public _despesaService: DespesaService,
-    public _vehicleService: VehicleService,
-    public modalService: NgbModal,
-  ) { }
   @ViewChild('modalContent') modalContent: TemplateRef<any>;
 
   closeResult: string;
@@ -42,12 +36,18 @@ export class DespesesComponent implements OnInit {
 
   settings = dadesTaula.settings;
   carregant = false;
+  constructor(
+    public _despesaService: DespesaService,
+    public _vehicleService: VehicleService,
+    public modalService: NgbModal
+  ) { }
 
   ngOnInit() {
     this.carregant = true;
     this.paginarDespeses(1);
     // this.carregarDespeses();
     this.carregarVehicles();
+    this.carregant = false;
   }
 
   carregarDespeses(i: number = 0) {
@@ -106,19 +106,7 @@ formatter = (x: {nom: string}) => x.nom;
       .subscribe( despeses => this.despeses = despeses);
 
   }
-  // carregarDespesa( termino: string ) {
-  //   if (termino.length <= 0) {
-  //     this.carregarDespeses();
-  //     return;
-  //   }
-  //   this._despesaService.cargarDespesa(termino)
-  //     .subscribe( despesa => {
-  //       this.despesa = despesa;
-  //       // this.open(content);
-  //     });
 
-
-  // }
   carregarVehicles() {
     this._vehicleService.cargarVehicles()
         .subscribe( vehicles => {

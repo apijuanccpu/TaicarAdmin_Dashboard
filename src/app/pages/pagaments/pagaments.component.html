@@ -29,6 +29,7 @@
                             <th>Client</th>
                             <th>Data</th>
                             <th>Factura</th>
+                            <th>Num Fact</th>
                             <th>Import</th>
                         </tr>
                     </thead>
@@ -48,6 +49,9 @@
                                 {{ pagament.factura['_id']}}
                             </td>
                             <td>
+                                {{ pagament.factura['num']}}
+                            </td>
+                            <td>
                                 {{ pagament.import_pagat }}
                             </td>
                             <td>
@@ -56,10 +60,6 @@
                             <td class="text-nowrap">
                                 <button [routerLink]="['/pagament', pagament._id ]" class="btn btn-sm btn-success" type="button">Edita</button>
                                 <button class="btn btn-sm btn-danger" (click)="borrarPagament( pagament._id)" type="button">Esborra</button>
-                                <!-- <button *ngIf="pressupost.estat == 'vigent' " class="btn btn-sm btn-danger" (click)="borrarPressupost( pressupost._id)" type="button">Esborra</button> -->
-                                <!-- <a [routerLink]="['/pressupost', pressupost._id , '' ]" data-toggle="tooltip" data-original-title="Edit"> <i class="fa fa-pencil text-inverse m-r-10"></i> </a>
-                              <a *ngIf="pressupost.estat == 'vigent' " (click)="borrarPressupost( pressupost._id )" data-toggle="tooltip" data-original-title="Delete"> <i class="fa fa-close text-danger"></i> </a>
-                              <a *ngIf="pressupost.estat == 'vigent' " (click)="anularPressupost( pressupost._id )" data-toggle="tooltip" data-original-title="Close"> <i class="fa fa-cc-amex text-danger"></i> </a> -->
                             </td>
                             <td>
                             </td>

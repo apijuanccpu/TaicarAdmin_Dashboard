@@ -14,14 +14,19 @@ export class NavigationComponent implements AfterViewInit {
   @Output() toggleSidebar = new EventEmitter<void>();
 
   pressupostosambvigencia: Pressupost[] = [];
+  pressupostosCaducats: Pressupost[] = [];
 
   public config: PerfectScrollbarConfigInterface = {};
+  public carregant = false;
+
   constructor(
     private modalService: NgbModal,
     public _notificacionsService: NotificacionsService
     ) {
+        this.carregant = true;
         this.carregarPressupostosSegonsDataVigencia();
-
+        this.carregarPressupostosCaducats();
+        this.carregant = false;
     }
 
   public showSearch = false;
@@ -93,20 +98,46 @@ export class NavigationComponent implements AfterViewInit {
   ngAfterViewInit() {}
 
   carregarPressupostosSegonsDataVigencia() {
-      this._notificacionsService.carregarpressupostos_datavigencia(moment().add(0, 'days').format('YYYY-MM-DD'))
-        .subscribe( resp => {
-          this.pressupostosambvigencia = resp;
-          console.log(this.pressupostosambvigencia);
-          for (const entry of this.pressupostosambvigencia){
-            const notificacio: Object = {
-              round: 'round-info',
-              icon: 'ti-settings',
-              title: 'Pressupost a punt de caducar',
-              subject: 'Pressupost:' + entry._id + '/ Vigència:' + entry.data_vigencia,
-              time: '9:08 AM'
-            };
-            this.notifications.push(notificacio);
-          }
-        });
-  }
+    this._notificacionsService.carregarpressupostos_datavigencia(moment().add(15, 'days').format('YYYY-MM-DD'))
+      .subscribe( resp => {
+        this.pressupostosambvigencia = resp;
+        console.log(this.pressupostosambvigencia);
+        for (const entry of this.pressupostosambvigencia) {
+          const notificacio: Object = {
+
+            image: 'assets/images/users/5.jpg',
+            name: 'Pressupost a punt de caducar',
+            comment: 'Pressupost:' + entry._id + '/ Vigència:' + entry.data_vigencia,
+            status: 'Pending',
+            date: 'April 14, 2016',
+            labelcolor: 'label-light-info',
+            pressupost: entry._id
+          };
+          this.notifications.push(notificacio);
+        }
+        console.log(this.notifications);
+      });
+}
+carregarPressupostosCaducats() {
+  this._notificacionsService.carregarPressupostosCaducats()
+    .subscribe( resp2 => {
+      console.log(resp2);
+      this.pressupostosCaducats = resp2;
+      console.log(this.pressupostosCaducats);
+      for (const entry of this.pressupostosCaducats) {
+        const notificacio2: Object = {
+
+          image: 'assets/images/users/5.jpg',
+          name: 'Pressupost caducat',
+          comment: 'Pressupost:' + entry._id + '/ Vigència:' + entry.data_vigencia,
+          status: 'Pending',
+          date: 'April 14, 2016',
+          labelcolor: 'label-light-danger',
+          pressupost: entry._id
+        };
+        this.notifications.push(notificacio2);
+      }
+      console.log(this.notifications);
+    });
+}
 }
