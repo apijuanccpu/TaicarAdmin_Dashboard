@@ -1,26 +1,28 @@
 <div class="row" *ngIf="!carregant">
 
     <!-- <form class="form-horizontal m-t-40 " #f2="ngForm " ngNativeValidate (ngSubmit)="guardaPressupost(pressupost) "> -->
-    <div class="col-md-12">
+    <div class="col-md-6">
         <div class="card card-body printableArea">
             <form class="form-horizontal m-t-40" #hero2Form="ngForm" ngNativeValidate (ngSubmit)="guardaDespesa( despesa )">
                 <div class="form-group">
-                    <label>Vehicle</label>
-                    <select [(ngModel)]="despesa.vehicle" name="vehicle" class="form-control" required>
+                    <label for="vehicle">Vehicle</label>
+                    <select [(ngModel)]="despesa.vehicle" id="vehicle" name="vehicle" class="form-control" required>
                     <option value=" ">Seleccione Vehicle</option>
                     <option *ngFor="let vehicle of vehicles" [value]="vehicle._id">
-                      {{ vehicle.nom }} - {{ vehicle.marca }} {{ vehicle.model }} }}
+                      {{ vehicle.nom }} - {{ vehicle.marca }} {{ vehicle.model }}
                     </option>
                   </select>
 
                 </div>
                 <div class="form-group">
-                    <label>Data</label>
-                    <input type="date" [(ngModel)]="despesa.data" name="data" class="form-control">
+                    <label for="despesa.data" class="control-label">Data de despesa</label>
+                    <input [(ngModel)]="despesa.data" id="despesa.data" name="despesa.data" type="date" class="form-control" required>
+                    <!-- <label>Data</label>
+                    <input type="date" [(ngModel)]="despesa.data" name="data" class="form-control"> -->
                 </div>
                 <div class="form-group">
-                    <label>Import</label>
-                    <input type="number" [(ngModel)]="despesa.preu" name="preu" class="form-control">
+                    <label for="preu">Import</label>
+                    <input type="number" [(ngModel)]="despesa.preu" id="preu" name="preu" class="form-control">
                 </div>
                 <div class="form-group">
                     <label>Tipus</label>
@@ -35,8 +37,8 @@
 
                 </div>
                 <div class="form-group">
-                    <label>Observacions</label>
-                    <textarea class="form-control" [(ngModel)]="despesa.observacions" name="observacions " rows="5 "></textarea>
+                    <label for="observacions">Observacions</label>
+                    <textarea class="form-control" [(ngModel)]="despesa.observacions" name="observacions" id="observacins" rows="5"></textarea>
                 </div>
 
                 <button class="btn btn-success" (click)="guardaDespesa(despesa)" type="button"> Guarda </button>

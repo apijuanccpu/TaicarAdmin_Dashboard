@@ -438,7 +438,7 @@ export class PressupostComponent implements OnInit {
                   this.detallfactura = new FacturaDetall(vpressupost.detall['vehicle'], vpressupost.detall['temporada'],
                         vpressupost.detall['temporada'], vpressupost.detall['temporada'], vpressupost.detall['temporada'],
                               vpressupost.detall['temporada'], vpressupost.detall['temporada']);
-                  this._facturaService.crearFactura(vpressupost, this.detallfactura)
+                  this._facturaService.crearFactura(vpressupost, vpressupost.detall)
                     .subscribe( factura => {
                       console.log(factura);
                     });

@@ -71,6 +71,7 @@ export class VehicleComponent implements OnInit {
           console.log(resp);
         });
   }
+
   esborraCalendari() {
 
       this._reservaService.esborraPeriode('2018-01-01', '2018-12-31', this.vehicle._id)
@@ -78,7 +79,21 @@ export class VehicleComponent implements OnInit {
           console.log(resp);
         });
   }
+  creaCalendari2019() {
 
+      this._reservaService.creacioPeriodeBooking('2019-01-01', '2019-12-31', this.vehicle._id)
+        .subscribe( resp => {
+          console.log(resp);
+        });
+  }
+
+  esborraCalendari2019() {
+
+      this._reservaService.esborraPeriode('2019-01-01', '2019-12-31', this.vehicle._id)
+        .subscribe( resp => {
+          console.log(resp);
+        });
+  }
   // cambioHospital( id: string ) {
 
   //   this._hospitalService.obtenerHospital( id )

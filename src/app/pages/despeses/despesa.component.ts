@@ -60,7 +60,9 @@ export class DespesaComponent implements OnInit {
 
 
       } else {
+        this.esnou = true;
         this.carregant = false;
+
 
       }
 
@@ -72,7 +74,7 @@ export class DespesaComponent implements OnInit {
   ngOnInit() {
 
     this.carregarVehicles();
-    this.despesa = new Despesa('', 0, null, '', '');
+
 
   }
 
@@ -87,13 +89,30 @@ export class DespesaComponent implements OnInit {
           });
   }
   guardaDespesa( vdesp: Despesa ) {
-    this._despesaService.guardarDespesa(vdesp)
+
+    console.log(vdesp);
+
+    if (this.esnou) {
+      this._despesaService.guardarDespesa(vdesp)
         .subscribe( despesa => {
           this.despesa = despesa;
           this.despesa = null;
           // this.carregarDespeses();
           this.modalService.dismissAll();
+          this.router.navigate(['/despeses' ]);
         });
+
+    } else {
+      this._despesaService.actualitzarDespesa(vdesp)
+      .subscribe( despesa => {
+        this.despesa = despesa;
+        this.despesa = null;
+        // this.carregarDespeses();
+        this.modalService.dismissAll();
+        this.router.navigate(['/despeses' ]);
+      });
+    }
+
   }
 
 

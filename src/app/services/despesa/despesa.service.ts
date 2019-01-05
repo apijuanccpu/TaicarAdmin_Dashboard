@@ -20,12 +20,20 @@ export class DespesaService {
     public _usuarioService: UsuarioService
   ) { }
 
-  carregarDespeses() {
-    const url = URL_SERVICIOS + '/despesa';
+  carregarDespeses(vdesde: number = 0) {
+    const url = URL_SERVICIOS + '/despesa?desde=' + vdesde;
     return this.http.get( url )
         .map( (resp: any) => {
           this.totalDespeses = resp.total;
           return resp.despeses;
+        });
+  }
+
+  paginarDespesa(vpagina: number = 0) {
+    const url = URL_SERVICIOS + '/despesa/paginar/' + vpagina;
+    return this.http.get( url )
+        .map( (resp: any) => {
+          return resp;
         });
   }
 
@@ -46,6 +54,25 @@ export class DespesaService {
             // swal('Pressupost Detall Creado', pressupost._id, 'success');
             return resp.despesa;
           });
+      }
+
+      actualitzarDespesa( vdespesa: Despesa) {
+        console.log(vdespesa);
+
+        const despesa = new Despesa(vdespesa.vehicle,
+                                    vdespesa.preu,
+                                    vdespesa.data,
+                                    vdespesa.tipus,
+                                    vdespesa.observacions);
+
+        let url = URL_SERVICIOS + '/despesa/' + vdespesa._id;
+
+          url += '?token=' + this._usuarioService.token;
+          return this.http.put( url, despesa )
+              .map( (resp: any) => {
+                // swal('Pressupost Detall Creado', pressupost._id, 'success');
+                return resp.despesa;
+              });
       }
 
       buscarDespesa( termino: string ) {
@@ -70,6 +97,13 @@ export class DespesaService {
         console.log(url);
         return this.http.get( url )
                     .map( (resp: any) => resp.despesa );
+      }
+
+      mostrarDespesesMes(mes: string, vehicle: string) {
+        const url = URL_SERVICIOS + '/despesa/despesespermes/' + mes + '/' + vehicle;
+        console.log(url);
+        return this.http.get( url )
+                    .map( (resp: any) => resp.despeses );
       }
 
 

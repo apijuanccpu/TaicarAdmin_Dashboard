@@ -4,6 +4,9 @@ import { FormsModule } from '@angular/forms';
 import { Routes, RouterModule } from '@angular/router';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
+// import { NgxDatatableModule } from '@swimlane/ngx-datatable';
+import { Ng2SmartTableModule } from 'ng2-smart-table';
+
 // import { PAGES_ROUTES } from './pages.routes';
 // ng2-charts
 import { ChartsModule } from 'ng2-charts';
@@ -62,6 +65,10 @@ import { Toast, ToastPackage, ToastrIconClasses, ToastrService } from 'ngx-toast
 import { NotificacionsComponent } from './notificacions/notificacions.component';
 import { DespesesComponent } from './despeses/despeses.component';
 import { DespesaComponent } from './despeses/despesa.component';
+import { Select2Module } from 'ng2-select2';
+import { NotificacioComponent } from './notificacions/notificacio.component';
+import { PagamentsComponent } from './pagaments/pagaments.component';
+import { PagamentComponent } from './pagaments/pagament.component';
 
 
 
@@ -167,6 +174,14 @@ const routes: Routes = [
         component: NotificacionsComponent
     },
     {
+        path: 'notificacio',
+        data: {
+          title: 'Taicar - Admin',
+          urls: [{ title: 'Notificacio', url: '/notificacio' }, { title: 'Gestió de notificació' }]
+        },
+        component: NotificacioComponent
+    },
+    {
         path: 'despeses',
         data: {
           title: 'Taicar - Admin',
@@ -183,13 +198,20 @@ const routes: Routes = [
         component: DespesaComponent
     },
     {
-    path: 'usuarios',
-        component: UsuariosComponent,
-        canActivate: [ AdminGuard ],
+        path: 'pagaments',
         data: {
-            title: 'Gestió Usuaris',
-            urls: [{ title: 'Usuarios', url: '/dashboard' }, { title: 'Gestió de pressupostos' }]
-          },
+          title: 'Taicar - Admin',
+          urls: [{ title: 'Pagaments', url: '/pagaments' }, { title: 'Gestió de Pagaments' }]
+        },
+        component: PagamentsComponent
+    },
+    {
+        path: 'pagament/:id',
+        data: {
+          title: 'Taicar - Admin',
+          urls: [{ title: 'Pagament', url: '/pagament' }, { title: 'Gestió de Pagaments' }]
+        },
+        component: PagamentComponent
     }
     ]
     }
@@ -231,7 +253,10 @@ const routes: Routes = [
         FacturaComponent,
         NotificacionsComponent,
         DespesesComponent,
-        DespesaComponent
+        DespesaComponent,
+        NotificacioComponent,
+        PagamentsComponent,
+        PagamentComponent
     ],
     exports: [
         CalendariComponent
@@ -243,6 +268,8 @@ const routes: Routes = [
         FormsModule,
         CommonModule,
         NgbModule,
+        Select2Module,
+        Ng2SmartTableModule,
         // ToastrModule.forRoot(),
         FlatpickrModule.forRoot(),
         ChartsModule,

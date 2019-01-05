@@ -11,6 +11,7 @@ export class NotificacionsComponent implements OnInit {
 
 
   pressupostosambvigencia: Pressupost[] = [];
+  pressupostosCaducats: Pressupost[] = [];
 
   constructor(public _notificacionsService: NotificacionsService) { }
 
@@ -63,13 +64,14 @@ export class NotificacionsComponent implements OnInit {
   ngOnInit() {
     console.log(this.notifs);
     this.carregarPressupostosSegonsDataVigencia();
+    this.carregarPressupostosCaducats();
   }
   carregarPressupostosSegonsDataVigencia() {
-    this._notificacionsService.carregarpressupostos_datavigencia(moment().add(0, 'days').format('YYYY-MM-DD'))
+    this._notificacionsService.carregarpressupostos_datavigencia(moment().add(15, 'days').format('YYYY-MM-DD'))
       .subscribe( resp => {
         this.pressupostosambvigencia = resp;
         console.log(this.pressupostosambvigencia);
-        for (const entry of this.pressupostosambvigencia){
+        for (const entry of this.pressupostosambvigencia) {
           const notificacio: Object = {
 
             image: 'assets/images/users/5.jpg',
@@ -77,11 +79,34 @@ export class NotificacionsComponent implements OnInit {
             comment: 'Pressupost:' + entry._id + '/ Vigència:' + entry.data_vigencia,
             status: 'Pending',
             date: 'April 14, 2016',
-            labelcolor: 'label-light-info'
+            labelcolor: 'label-light-info',
+            pressupost: entry._id
           };
           this.notifications.push(notificacio);
         }
+        console.log(this.notifications);
       });
+}
+carregarPressupostosCaducats() {
+  this._notificacionsService.carregarPressupostosCaducats()
+    .subscribe( resp => {
+      this.pressupostosCaducats = resp;
+      console.log(this.pressupostosambvigencia);
+      for (const entry of this.pressupostosCaducats) {
+        const notificacio: Object = {
+
+          image: 'assets/images/users/5.jpg',
+          name: 'Pressupost caducat',
+          comment: 'Pressupost:' + entry._id + '/ Vigència:' + entry.data_vigencia,
+          status: 'Pending',
+          date: 'April 14, 2016',
+          labelcolor: 'label-light-danger',
+          pressupost: entry._id
+        };
+        this.notifications.push(notificacio);
+      }
+      console.log(this.notifications);
+    });
 }
 
 }

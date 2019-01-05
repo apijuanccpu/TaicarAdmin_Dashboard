@@ -32,7 +32,7 @@ export class FacturaService {
         });
   }
 
-  crearFactura( vpressupost: Pressupost, vdetallfactura: FacturaDetall) {
+  crearFactura( vpressupost: Pressupost, vdetallpressupost: PressupostDetall[]) {
     console.log(vpressupost);
 
     const factura = new Factura(vpressupost.num, vpressupost.data, vpressupost.data_vigencia,
@@ -45,12 +45,19 @@ export class FacturaService {
       return this.http.post( url, factura )
           .map( (resp: any) => {
             // swal('Pressupost Detall Creado', pressupost._id, 'success');
-            this.guardaDetall(vdetallfactura)
-              .subscribe( detallfactura => {
-                console.log(detallfactura);
-                return resp.factura;
+            console.log(resp);
 
-              });
+            for (const x of vdetallpressupost) {
+              const detallfactura = new FacturaDetall(x.vehicle, x.temporada, x.data_inicial, x.data_final,
+                x.dies, resp.factura['_id'], x.observacions, x.preu, '');
+                this.guardaDetall(detallfactura)
+                    .subscribe( facturadetall => {
+                      console.log(facturadetall);
+                        return resp.facturadetall;
+
+                        });
+              }
+              return resp.factura;
 
           });
       }
@@ -80,8 +87,17 @@ export class FacturaService {
           return this.http.post( url, vfacturadetall )
               .map( (resp: any) => {
                 // swal('Pressupost Detall Creado', pressupost._id, 'success');
-                return resp.factura_detall;
+                return resp.facturadetall;
               });
+          }
+
+          carregaFacturesDetall( id_factura: string ) {
+            let url = URL_SERVICIOS + '/facturadetall/perfactura/' + id_factura;
+             url += '?token=' + this._usuarioService.token;
+            return this.http.get( url )
+                .map( (resp: any) => {
+                   return resp.factures_detall;
+                });
           }
 
 }

@@ -13,6 +13,7 @@ import swal from 'sweetalert2';
 import { Observable } from 'rxjs';
 import { ReservaService } from '../../services/reserva/reserva.service';
 import { Reserva } from '../../models/reserva.model';
+import { Select2OptionData } from 'ng2-select2';
 
 
 
@@ -26,8 +27,10 @@ export class PressupostosComponent implements OnInit {
 
   closeResult: string;
   public model: any;
+  public exampleData: Array<Select2OptionData>;
 
 
+  carregant = false;
   clickedItem;
   nomsclients = [];
   clients: Persona[] = [];
@@ -43,8 +46,29 @@ export class PressupostosComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.carregant = true;
     this.carregarPressupostosVigents();
     this.carregarClients();
+    this.exampleData = [
+      {
+        id: 'basic1',
+        text: 'Basic 1'
+      },
+      {
+        id: 'basic2',
+        disabled: true,
+        text: 'Basic 2'
+      },
+      {
+        id: 'basic3',
+        text: 'Basic 3'
+      },
+      {
+        id: 'basic4',
+        text: 'Basic 4'
+      }
+    ];
+    this.carregant = false;
   }
 
   search2 = (text$: Observable<string>) =>
@@ -106,6 +130,13 @@ export class PressupostosComponent implements OnInit {
         .subscribe( pressupostos => this.pressupostos = pressupostos);
   }
 
+  changed(evt) {
+    if (evt.target.checked) {
+      this.carregarPressupostos();
+    } else {
+      this.carregarPressupostosVigents();
+    }
+ }
   carregarPressupostos() {
     this._pressupostosService.carregarPressupostos()
         .subscribe( pressupostos => this.pressupostos = pressupostos);

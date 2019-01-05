@@ -44,6 +44,7 @@ import { NopagefoundComponent } from './shared/nopagefound/nopagefound.component
 import { CalendariComponent } from './pages/calendari/calendari.component';
 
 
+
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true,
   wheelSpeed: 2,

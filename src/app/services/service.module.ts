@@ -5,6 +5,7 @@ import { ModalUploadService } from '../component/modal-upload/modal-upload.servi
 import { DespesaService } from './despesa/despesa.service';
 
 
+
 import {
   SettingsService,
   SidebarService,
@@ -21,6 +22,7 @@ import {
   ReservaService,
   NotificacionsService,
   FacturaService,
+  PagamentService,
   VerificaTokenGuard
  } from './service.index';
 
@@ -49,6 +51,7 @@ import {
     NotificacionsService,
     FacturaService,
     DespesaService,
+    PagamentService,
     VerificaTokenGuard
   ],
   declarations: []

@@ -30,7 +30,7 @@
                 <li>
                     <div class="message-center" [perfectScrollbar]="config">
                         <!-- Message -->
-                        <a href="#" *ngFor="let notification of notifications">
+                        <a [routerLink]="['/notificacio']" *ngFor="let notification of notifications">
                             <div class="round {{notification.round}}"><i class="{{notification.icon}}"></i></div>
                             <div class="mail-contnet m-l-10">
                                 <h5>{{notification.title}}</h5> <span class="mail-desc">{{notification.subject}}</span> <span class="time">{{notification.time}}</span>
@@ -39,7 +39,7 @@
                     </div>
                 </li>
                 <li>
-                    <a class="nav-link text-center" href="javascript:void(0);"> <strong>Check all notifications</strong> <i class="fa fa-angle-right"></i> </a>
+                    <a class="nav-link text-center" [routerLink]="['/notificacions']"> <strong>Veure totes les notificacions</strong> <i class="fa fa-angle-right"></i> </a>
                 </li>
             </ul>
         </div>

@@ -1,20 +1,14 @@
 <div class="row animated fadeIn">
-    <div class="col-12">
+    <div class="col-3">
         <div class="card">
             <div class="card-body">
-                <label for="typeahead-basic">Usuaris:</label>
-                <input id="typeahead-basic" type="text" class="form-control" [(ngModel)]="model" (selectItem)="selectedItem($event)" [ngbTypeahead]="search" />
-                <hr>
+                <!-- <label for="typeahead-basic">Usuaris:</label> -->
+                <input id="typeahead-basic" type="text" class="form-control" [(ngModel)]="model" (selectItem)="selectedItem($event)" placeholder="Cerca client ..." [ngbTypeahead]="search" />
                 <!-- <input #input (keyup)="buscarPersona( input.value )" type="text" class="form-control" placeholder="Buscar usuario..."> -->
-
             </div>
         </div>
     </div>
-</div>
-
-
-<div class="row animated fadeIn">
-    <div class="col-12">
+    <div class="col-9">
         <div class="card">
             <div class="card-body">
                 <div class="text-right">
@@ -27,6 +21,31 @@
         </div>
     </div>
 </div>
+<!-- <div class="row animated fadeIn" *ngIf="!carregant">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <select2 [data]="exampleData" [cssImport]=true></select2>
+
+            </div>
+        </div>
+    </div>
+</div> -->
+
+<!-- <div class="row animated fadeIn">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <div class="text-right">
+                    <button (click)="open(content)" type="button" class="btn waves-effect waves-light btn-rounded btn-primary">
+                            <i class="fa fa-plus"></i> 
+                            Crea Pressupost
+                          </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div> -->
 
 
 <div class="row">
@@ -35,10 +54,9 @@
             <div class="card-body">
 
                 <h3 class="card-title">Pressupostos: ( <small> {{ _pressupostosService.totalPressupostos }} </small> )</h3>
-                <div _ngcontent-c9="" class="custom-control custom-checkbox">
-                    <input _ngcontent-c9="" class="custom-control-input" id="customCheck1" type="checkbox">
-                    <label _ngcontent-c9="" class="custom-control-label" for="customCheck1">Check this custom checkbox
-                    </label>
+                <div class="custom-control custom-checkbox mr-sm-2 m-b-15">
+                    <input type="checkbox" (change)="changed($event)" class="custom-control-input" id="checkbox0" value="check">
+                    <label class="custom-control-label" for="checkbox0">Visualitza tots els pressupostos</label>
                 </div>
                 <table class="table table-hover">
                     <thead>

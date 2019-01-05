@@ -9,9 +9,9 @@ export class FacturaDetall {
         public data_inicial: string,
         public data_final: string,
         public dies: number,
+        public id_factura: string,
         public observacions?: string,
         public preu?: number,
-        public _id?: string,
-        public id_factura?: string,
+        public _id?: string
     ) { }
 }

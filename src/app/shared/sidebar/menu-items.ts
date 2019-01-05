@@ -9,7 +9,12 @@ export const ROUTES: RouteInfo[] = [
   label: '3',
   labelClass: 'label label-rouded label-themecolor pull-right',
   extralink: false,
-  submenu: []
+  submenu: [
+    { path: '/dashboard',
+      title: 'Dashboard', icon: '', class: '', label: '', labelClass: '', extralink: false, submenu: [] },
+    { path: '/dashboard2',
+      title: 'Dashboard2', icon: '', class: '', label: '', labelClass: '', extralink: false, submenu: [] },
+  ]
 },
 {
   path: '',
@@ -58,6 +63,21 @@ export const ROUTES: RouteInfo[] = [
       title: 'Despeses', icon: '', class: '', label: '', labelClass: '', extralink: false, submenu: [] },
       { path: '/notificacions',
       title: 'Notificacions', icon: '', class: '', label: '', labelClass: '', extralink: false, submenu: [] }
+  ]
+},
+{
+  path: '',
+  title: 'Facturació',
+  icon: 'mdi mdi-gauge',
+  class: 'has-arrow',
+  label: '3',
+  labelClass: 'label label-rouded label-themecolor pull-right',
+  extralink: false,
+  submenu: [
+    { path: '/facturacio',
+      title: 'Facturacio', icon: '', class: '', label: '', labelClass: '', extralink: false, submenu: [] },
+      { path: '/pagaments',
+      title: 'Pagaments', icon: '', class: '', label: '', labelClass: '', extralink: false, submenu: [] }
   ]
 }
 
