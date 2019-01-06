@@ -48,7 +48,7 @@ export class PagamentComponent implements OnInit {
       } else {
         this.esnou = true;
         this.carregant = false;
-        this.pagament = new Pagament('', '', 0, null, '');
+        this.pagament = new Pagament('', '', 0, '', '');
         console.log(this.esnou);
 
 

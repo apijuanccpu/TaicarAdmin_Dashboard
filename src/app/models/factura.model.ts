@@ -16,6 +16,7 @@ export class Factura {
         public estat: string,
         public observacions?: string,
         public pendent_pagament?: number,
+        public pendent_pagat?: number,
         public _id?: string
     ) { }
 }

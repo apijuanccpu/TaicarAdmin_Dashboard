@@ -80,6 +80,20 @@ export class FacturaService {
             });
       }
 
+      actualitzar_importsFactra( varimport: Number, fact: Factura) {
+        let url = URL_SERVICIOS + '/factura/actualitzaPagaments/' + fact._id ;
+
+        url += '?token=' + this._usuarioService.token;
+      console.log(url);
+      console.log(fact);
+        return this.http.put( url, { varimport, fact} )
+            .map( (resp: any) => {
+              // swal('Pressupost Detall Creado', pressupost._id, 'success');
+              console.log(resp);
+              return resp.factura;
+            });
+      }
+
       guardaDetall( vfacturadetall: FacturaDetall) {
         let url = URL_SERVICIOS + '/facturadetall';
 

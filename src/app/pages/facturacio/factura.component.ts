@@ -9,6 +9,8 @@ import { PagamentService } from '../../services/pagament/pagament.service';
 import { ModalUploadService } from '../../component/modal-upload/modal-upload.service';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 
+import swal from 'sweetalert2';
+
 @Component({
   selector: 'app-factura',
   templateUrl: './factura.component.html'
@@ -67,18 +69,47 @@ export class FacturaComponent implements OnInit {
   }
 
   guardaPagament(vpago: Pagament) {
-      this._pagamentService.altaPagament(vpago)
-      .subscribe( pagament => {
-        console.log(pagament);
-        this._pagamentService.carregarPagamentsFactura(this.vid)
-              .subscribe( pagaments => {
-                this.pagaments = pagaments;
-                console.log(pagaments);
-              });
-    });
+    console.log(vpago);
+
+    if (this.factura.pendent_pagament >= vpago.import_pagat) {
+
+      this._facturaService.actualitzar_importsFactra(vpago.import_pagat, this.factura)
+        .subscribe( resp => {
+          console.log(resp);
+          console.log('imports actualitzats');
+          this._pagamentService.altaPagament(vpago)
+          .subscribe( pagament => {
+            console.log(pagament);
+            console.log('alta de pagament realitzat');
+            this.cargarFactura(this.vid);
+          });
+        });
+      // this._facturaService.actualitzar_importsFactra(vpago.import_pagat, this.factura._id)
+      //   .subscribe ( actual => {
+      //     this._pagamentService.altaPagament(vpago)
+      //       .subscribe( pagament => {
+      //         console.log(pagament);
+      //         this._pagamentService.carregarPagamentsFactura(this.vid)
+      //               .subscribe( pagaments => {
+      //                 this.pagaments = pagaments;
+      //                 console.log(pagaments);
+      //               });
+      //         });
+
+      //   });
+    } else {
+      swal({
+        type: 'error',
+        title: 'Pagament incorrecte',
+        text: 'Limport anotat es superior a limport pendent de la factura',
+        footer: '<a href>Why do I have this issue?</a>'
+      });
+    }
+
   }
   open(contenedor) {
-    this.pagament = new Pagament(this.factura.client['_id'], this.factura._id, 0, null);
+    console.log(this.factura);
+    this.pagament = new Pagament(this.factura.client['_id'], this.factura['_id'], 0, null);
     this.modalService.open(contenedor, {ariaLabelledBy: 'modal-basic-title', size: 'lg'}).result.then((result) => {
       this.closeResult = `Closed with: ${result}`;
     }, (reason) => {
