@@ -70,7 +70,7 @@ import { NotificacioComponent } from './notificacions/notificacio.component';
 import { PagamentsComponent } from './pagaments/pagaments.component';
 import { PagamentComponent } from './pagaments/pagament.component';
 
-
+import { ProfileComponent} from './profile/profile.component';
 
 const routes: Routes = [
     {
@@ -120,7 +120,7 @@ const routes: Routes = [
     {
         path: 'persones',
         data: {
-          title: 'Starter Page',
+          title: '',
           urls: [{ title: 'Pressupostos', url: '/dashboard' }, { title: 'Gestió de pressupostos' }]
         },
         component: PersonesComponent
@@ -242,6 +242,7 @@ const routes: Routes = [
         // MedicoComponent,
         // BusquedaComponent,
         VehiclesComponent,
+        Caravana2Component,
         ClientComponent,
         VehicleComponent,
         PersonesComponent,
@@ -256,7 +257,8 @@ const routes: Routes = [
         DespesaComponent,
         NotificacioComponent,
         PagamentsComponent,
-        PagamentComponent
+        PagamentComponent,
+        ProfileComponent
     ],
     exports: [
         CalendariComponent

@@ -48,6 +48,8 @@ export class PressupostComponent implements OnInit {
 
   detallfactura: FacturaDetall;
 
+  numfactura: number;
+
   carregant = true;
 
   closeResult: string;
@@ -438,10 +440,16 @@ export class PressupostComponent implements OnInit {
                   this.detallfactura = new FacturaDetall(vpressupost.detall['vehicle'], vpressupost.detall['temporada'],
                         vpressupost.detall['temporada'], vpressupost.detall['temporada'], vpressupost.detall['temporada'],
                               vpressupost.detall['temporada'], vpressupost.detall['temporada']);
-                  this._facturaService.crearFactura(vpressupost, vpressupost.detall)
+                  this._facturaService.obtenirultimnum(2019)
+                    .subscribe( numeracio => {
+                      console.log(numeracio);
+                      this._facturaService.crearFactura(vpressupost, vpressupost.detall, numeracio[0].num_correlatiu)
                     .subscribe( factura => {
                       console.log(factura);
                     });
+
+                    });
+
                 });
   });
 

@@ -16,6 +16,7 @@ export class FacturaService {
 
   totalFactures = 0;
   nodisponibles = [];
+  numfactura: number;
 
 
   constructor(
@@ -32,34 +33,34 @@ export class FacturaService {
         });
   }
 
-  crearFactura( vpressupost: Pressupost, vdetallpressupost: PressupostDetall[]) {
+  crearFactura( vpressupost: Pressupost, vdetallpressupost: PressupostDetall[], numfactura: number) {
     console.log(vpressupost);
 
-    const factura = new Factura(vpressupost.num, vpressupost.data, vpressupost.data_vigencia,
-        vpressupost.client, null , vpressupost.preu_brut, vpressupost.preu_net, 'vigent', vpressupost.observacions);
+        const factura = new Factura(numfactura, moment().format('YYYY-MM-DD'), moment().add(30, 'days').format('YYYY-MM-DD'),
+          vpressupost.client, null , vpressupost.preu_brut, vpressupost.preu_net, 'vigent', vpressupost.observacions);
 
-    let url = URL_SERVICIOS + '/factura';
 
-      url += '?token=' + this._usuarioService.token;
-      console.log(factura);
-      return this.http.post( url, factura )
-          .map( (resp: any) => {
-            // swal('Pressupost Detall Creado', pressupost._id, 'success');
-            console.log(resp);
+      let url = URL_SERVICIOS + '/factura';
 
-            for (const x of vdetallpressupost) {
-              const detallfactura = new FacturaDetall(x.vehicle, x.temporada, x.data_inicial, x.data_final,
-                x.dies, resp.factura['_id'], x.observacions, x.preu, '');
-                this.guardaDetall(detallfactura)
-                    .subscribe( facturadetall => {
-                      console.log(facturadetall);
-                        return resp.facturadetall;
+        url += '?token=' + this._usuarioService.token;
+        console.log(factura);
+        return this.http.post( url, factura )
+            .map( (resp: any) => {
+              // swal('Pressupost Detall Creado', pressupost._id, 'success');
+              console.log(resp);
+              for (const x of vdetallpressupost) {
+                const detallfactura = new FacturaDetall(x.vehicle, x.temporada, x.data_inicial, x.data_final,
+                  x.dies, resp.factura['_id'], x.observacions, x.preu, '');
+                  this.guardaDetall(detallfactura)
+                      .subscribe( facturadetall => {
+                        console.log(facturadetall);
+                          return resp.facturadetall;
+                          });
+                }
+                return resp.factura;
 
-                        });
-              }
-              return resp.factura;
+      });
 
-          });
       }
       carregarFactura( id: string) {
         const url = URL_SERVICIOS + '/factura/' + id;
@@ -114,4 +115,12 @@ export class FacturaService {
                 });
           }
 
+          obtenirultimnum( anualitat: number ) {
+            let url = URL_SERVICIOS + '/numeraciofact/ultim/' + anualitat;
+             url += '?token=' + this._usuarioService.token;
+            return this.http.get( url )
+                .map( (resp: any) => {
+                   return resp.numeracio;
+                });
+          }
 }

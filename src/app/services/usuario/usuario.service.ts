@@ -7,6 +7,7 @@ import swal from 'sweetalert2';
 
 
 import { Observable } from 'rxjs/Observable';
+import { Subscription } from 'rxjs/Subscription';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 
@@ -15,6 +16,9 @@ import { SubirArchivoService } from '../subir-archivo/subir-archivo.service';
 
 @Injectable()
 export class UsuarioService {
+
+
+  subscription: Subscription;
 
   usuario: Usuario;
   token: string;

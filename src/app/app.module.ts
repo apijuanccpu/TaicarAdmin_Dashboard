@@ -42,6 +42,8 @@ import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './login/register.component';
 import { NopagefoundComponent } from './shared/nopagefound/nopagefound.component';
 import { CalendariComponent } from './pages/calendari/calendari.component';
+import { NgbdAlertBasicComponent } from './component/alert/alert.component';
+import { ModalUploadComponent } from './component/modal-upload/modal-upload.component';
 
 
 
@@ -62,7 +64,9 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     SidebarComponent,
     LoginComponent,
     RegisterComponent,
-    NopagefoundComponent
+    NopagefoundComponent,
+    NgbdAlertBasicComponent,
+    ModalUploadComponent
   ],
   imports: [
     BrowserModule,

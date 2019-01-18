@@ -91,6 +91,9 @@
                                 {{ factura.client.nombre }}
                             </td>
                             <td>
+                                {{ factura.estat }}
+                            </td>
+                            <td>
                                 <button [routerLink]="['/factura', factura._id ]" class="btn btn-sm btn-success" type="button">Obrir</button>
                             </td>
                         </tr>

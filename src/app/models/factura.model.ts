@@ -7,8 +7,8 @@ export class Factura {
 
     constructor (
         public num: number,
-        public data: Date,
-        public data_vigencia: Date,
+        public data: String,
+        public data_vigencia: String,
         public client: Persona,
         public detall: FacturaDetall[],
         public preu_brut: number,

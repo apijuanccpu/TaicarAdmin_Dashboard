@@ -173,7 +173,7 @@ export class CalendariComponent implements OnInit {
         this.reserves = resp;
         console.log(resp);
         console.log(this.reserves);
-        for (const entry of this.reserves){
+        for (const entry of this.reserves) {
           this.events.push({
             title: 'Reserva:' + entry._id + ' / ' + 'Vehicle:' + entry.vehicle['matricula'] + ' / '
                   + 'Client:' + entry.pressupost['client'],
